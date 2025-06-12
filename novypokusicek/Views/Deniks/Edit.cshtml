@@ -1,0 +1,68 @@
+﻿@model novypokusicek.Models.Denik
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Denik</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div style="width: 1000px" class="form-group">
+                <label asp-for="Jmeno" class="control-label"></label>
+                <input asp-for="Jmeno" class="form-control" />
+                <span asp-validation-for="Jmeno" class="text-danger"></span>
+            </div>
+            <div style="width: 1000px" class="form-group">
+                <label asp-for="Prijmeni" class="control-label"></label>
+                <input asp-for="Prijmeni" class="form-control" />
+                <span asp-validation-for="Prijmeni" class="text-danger"></span>
+            </div>
+            <div style="width: 1000px" class="form-group">
+                <label asp-for="Nazev" class="control-label"></label>
+                <input asp-for="Nazev" class="form-control" />
+                <span asp-validation-for="Nazev" class="text-danger"></span>
+            </div>
+            <div style="width: 1000px" class="form-group">
+                <label asp-for="RokVydani" class="control-label"></label>
+                <input asp-for="RokVydani" class="form-control" />
+                <span asp-validation-for="RokVydani" class="text-danger"></span>
+            </div>
+            <div style="width: 1000px" class="form-group">
+                <label asp-for="Nakladatelstvi" class="control-label"></label>
+                <input asp-for="Nakladatelstvi" class="form-control" />
+                <span asp-validation-for="Nakladatelstvi" class="text-danger"></span>
+            </div>
+            <div style="width: 1000px" class="form-group">
+                <label asp-for="PocetStran" class="control-label"></label>
+                <input asp-for="PocetStran" class="form-control" />
+                <span asp-validation-for="PocetStran" class="text-danger"></span>
+            </div>
+            <div style="width: 1000px" class="form-group">
+                <label asp-for="Popis" class="control-label"></label>
+                <textarea asp-for="Popis" class="form-control"></textarea>
+                <span asp-validation-for="Popis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.0.3/tinymce.min.js"></script>
+    <script src="~/js/initTinyMCE.js"></script>
+}
