@@ -1,0 +1,98 @@
+﻿@model IEnumerable<novypokusicek.Models.Denik>
+
+@{
+    ViewData["Title"] = "Knizky";
+}
+
+<h1>Knizky</h1>
+
+<p>
+    <a asp-action="Create">Přidat Novou Knížku</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nazev)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jmeno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prijmeni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RokVydani)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nakladatelstvi)
+            </th>
+            <th style="width: 30%;">
+                <!-- Increased width for Popis -->
+                @Html.DisplayNameFor(model => model.Popis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PocetStran)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nazev)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Jmeno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prijmeni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RokVydani)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nakladatelstvi)
+                </td>
+                <td>
+                    @Html.Raw(item.Popis)  <!-- Display Popis content with HTML formatting -->
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PocetStran)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button onclick="removeFormatting()">Remove tags</button>
+
+<script>
+    function removeFormatting() {
+        let tbody = document.getElementById("tab");
+        let tds = tbody.querySelectorAll("td");
+
+        tds.forEach(td => {
+            // Create a temporary element to parse the HTML and sanitize it
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = td.innerHTML;
+
+            // Remove unwanted tags (you can adjust this regex as needed)
+            tempDiv.querySelectorAll('*').forEach(el => {
+                if (!['i', 'b', 'em', 'strong', 'u', 'span'].includes(el.nodeName.toLowerCase())) {
+                    el.replaceWith(...el.childNodes); // Replace the element with its content
+                }
+            });
+
+            // Update the td content with the cleaned HTML
+            td.innerHTML = tempDiv.innerHTML;
+        });
+    }
+</script>
+
